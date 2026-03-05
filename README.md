@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# Assessment Platform
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simplified **Applicant Tracking System (ATS) with an Online Assessment Module** (MERN). The repo is split into **frontend** (React) and **backend** (Node.js + Express).
 
-## Available Scripts
+## Project structure
 
-In the project directory, you can run:
+```
+prayas/
+├── frontend/     # React app (CRA) – UI, auth, candidates, assessment, admin
+├── backend/      # Node.js + Express API – auth, DB placeholder, routes
+└── README.md     # This file
+```
 
-### `npm start`
+## Quick start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Backend
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+cd backend
+npm install
+# Copy env.example.txt to .env and set PORT, JWT_SECRET, optional MONGODB_URI
+npm start
+```
 
-### `npm test`
+Runs at **http://localhost:5001** (health: `GET /api/health`).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Frontend
 
-### `npm run build`
+```bash
+cd frontend
+npm install
+npm start
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Runs at **http://localhost:3000**. In development, the frontend proxies `/api` to the backend (port 5001).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Overview
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Candidates:** Register, login, submit application, dashboard (status), 30-min MCQ if shortlisted, confirmation.
+- **Admin:** Register as admin, login, view/shortlist candidates, manage MCQ questions, view results, download CSV.
 
-### `npm run eject`
+See **frontend/README.md** for full feature list and **backend/README.md** for API structure.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Tech
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Layer   | Stack |
+|--------|--------|
+| Frontend | React, react-router-dom, mock store (localStorage) – ready to switch to API |
+| Backend  | Node.js, Express, CORS, JWT (jsonwebtoken), optional Mongoose |

@@ -3,15 +3,14 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import Home from './pages/Home';
-import Login from './pages/Login';
-import Register from './pages/Register';
+import CandidateAuth from './pages/CandidateAuth';
 import AdminLogin from './pages/AdminLogin';
-import AdminRegister from './pages/AdminRegister';
 import CandidateDashboard from './pages/CandidateDashboard';
 import ApplicationForm from './pages/ApplicationForm';
 import Assessment from './pages/Assessment';
 import AssessmentConfirmation from './pages/AssessmentConfirmation';
 import AdminCandidates from './pages/AdminCandidates';
+import AdminCandidateDetail from './pages/AdminCandidateDetail';
 import AdminQuestions from './pages/AdminQuestions';
 import AdminResults from './pages/AdminResults';
 import './App.css';
@@ -22,8 +21,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<CandidateAuth />} />
+          <Route path="/register" element={<Navigate to="/login?tab=create" replace />} />
           <Route
             path="/dashboard"
             element={
@@ -32,14 +31,8 @@ function App() {
               </ProtectedRoute>
             }
           />
-          <Route
-            path="/application"
-            element={
-              <ProtectedRoute requireRole="candidate">
-                <ApplicationForm />
-              </ProtectedRoute>
-            }
-          />
+          <Route path="/apply" element={<ProtectedRoute requireRole="candidate"><ApplicationForm /></ProtectedRoute>} />
+          <Route path="/application" element={<Navigate to="/apply" replace />} />
           <Route
             path="/assessment"
             element={
@@ -57,12 +50,19 @@ function App() {
             }
           />
           <Route path="/admin/login" element={<AdminLogin />} />
-          <Route path="/admin/register" element={<AdminRegister />} />
           <Route
             path="/admin"
             element={
               <ProtectedRoute requireRole="admin">
                 <AdminCandidates />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/admin/candidates/:id"
+            element={
+              <ProtectedRoute requireRole="admin">
+                <AdminCandidateDetail />
               </ProtectedRoute>
             }
           />
