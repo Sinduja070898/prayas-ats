@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { validateEmail, validatePassword } from '../utils/validation';
 import CandidateLayout from '../components/CandidateLayout';
-import './CandidateAuth.css';
+import '../styles/CandidateAuth.css';
 
 export default function CandidateAuth() {
   const [mode, setMode] = useState('signin'); // 'signin' | 'create'

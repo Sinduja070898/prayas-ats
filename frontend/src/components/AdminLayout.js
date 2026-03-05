@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { getCandidates } from '../utils/mockStore';
 import { getApplications, getAssessmentResults } from '../utils/mockStore';
 import { APPLICATION_STATUS } from '../utils/constants';
-import './AdminLayout.css';
+import '../styles/AdminLayout.css';
 
 const STEPS = [
   { num: 1, label: 'Admin Login', path: '/admin/login' },

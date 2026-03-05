@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
 import { apiQuestionsAdmin, apiCreateQuestion, apiUpdateQuestion, apiDeleteQuestion } from '../api/client';
 import { getMcqQuestions, addMcqQuestion, updateMcqQuestion, deleteMcqQuestion } from '../utils/mockStore';
-import './AdminQuestions.css';
+import '../styles/AdminQuestions.css';
 
 const OPTION_LETTERS = ['A', 'B', 'C', 'D'];
 
@@ -212,7 +212,12 @@ export default function AdminQuestions() {
           ))}
         </ul>
         {questions.length === 0 && !showForm && (
-          <p className="empty-msg">No questions yet. Click &quot;+ Add Question&quot; to create one.</p>
+          <div className="empty-msg-block">
+            <p className="empty-msg">No questions yet. Click &quot;+ Add Question&quot; to create one.</p>
+            {useApi && (
+              <p className="empty-msg-hint">Questions are in-memory and clear on server restart.</p>
+            )}
+          </div>
         )}
       </div>
     </AdminLayout>

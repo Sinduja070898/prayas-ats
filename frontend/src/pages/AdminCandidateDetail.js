@@ -4,7 +4,7 @@ import AdminLayout from '../components/AdminLayout';
 import { apiApplicationById, apiUpdateApplicationStatus, apiAssessmentsList } from '../api/client';
 import { getApplications, updateApplicationStatus, getResultByCandidateId } from '../utils/mockStore';
 import { APPLICATION_STATUS } from '../utils/constants';
-import './AdminCandidateDetail.css';
+import '../styles/AdminCandidateDetail.css';
 
 export default function AdminCandidateDetail() {
   const { id } = useParams();

@@ -18,7 +18,7 @@ prayas/
 ```bash
 cd backend
 npm install
-# Copy env.example.txt to .env and set PORT, JWT_SECRET, optional MONGODB_URI
+# Copy env.example to .env and set PORT, JWT_SECRET
 npm start
 ```
 

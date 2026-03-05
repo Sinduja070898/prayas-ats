@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import AdminLayout from '../components/AdminLayout';
 import { apiAssessmentsList, apiAssessmentsExport } from '../api/client';
 import { getAssessmentResults } from '../utils/mockStore';
-import './AdminResults.css';
+import '../styles/AdminResults.css';
 
 function downloadCsv(results) {
   const headers = ['#', 'Candidate Name', 'Candidate ID', 'Score', 'Total', 'Submitted At'];
@@ -26,18 +26,32 @@ function downloadCsv(results) {
   URL.revokeObjectURL(link.href);
 }
 
+function formatTimeTaken(seconds) {
+  if (seconds == null || seconds === undefined) return '—';
+  const m = Math.floor(Number(seconds) / 60);
+  const s = Math.round(Number(seconds) % 60);
+  return m > 0 ? `${m}m ${s}s` : `${s}s`;
+}
+
 export default function AdminResults() {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [fromApi, setFromApi] = useState(true);
 
   useEffect(() => {
     let cancelled = false;
     (async () => {
       try {
         const res = await apiAssessmentsList();
-        if (!cancelled) setResults(res.assessments || []);
+        if (!cancelled) {
+          setResults(res.assessments || []);
+          setFromApi(true);
+        }
       } catch (_) {
-        if (!cancelled) setResults(getAssessmentResults());
+        if (!cancelled) {
+          setResults(getAssessmentResults());
+          setFromApi(false);
+        }
       } finally {
         if (!cancelled) setLoading(false);
       }
@@ -108,7 +122,14 @@ export default function AdminResults() {
             </thead>
             <tbody>
               {sorted.length === 0 ? (
-                <tr><td colSpan={5}>No assessment results yet.</td></tr>
+                <tr>
+                  <td colSpan={5}>
+                    <p className="leaderboard-empty">No assessment results yet.</p>
+                    {fromApi && (
+                      <p className="leaderboard-empty-hint">Results are in-memory; they clear on server restart.</p>
+                    )}
+                  </td>
+                </tr>
               ) : (
                 sorted.map((r, i) => {
                   const pct = r.total ? (r.score / r.total) * 100 : 0;
@@ -123,7 +144,7 @@ export default function AdminResults() {
                           <span className="score-text">{r.score}/{r.total}</span>
                         </div>
                       </td>
-                      <td>—</td>
+                      <td>{formatTimeTaken(r.timeTakenSeconds)}</td>
                       <td>{r.submittedAt ? new Date(r.submittedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) : '—'}</td>
                     </tr>
                   );

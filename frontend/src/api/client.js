@@ -1,4 +1,3 @@
-// In development, call backend directly to avoid proxy returning 403; otherwise use same origin (proxy or production).
 const BASE =
   typeof process.env.REACT_APP_API_URL !== 'undefined'
     ? process.env.REACT_APP_API_URL
@@ -28,17 +27,12 @@ async function handleRes(r) {
   return data;
 }
 
-// ——— Auth (no token required) ———
 export async function apiLogin(email, password, role = 'candidate') {
-  const url = `${BASE}/api/auth/login`;
-  const r = await fetch(url, {
+  const r = await fetch(`${BASE}/api/auth/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password, role }),
   });
-  // #region agent log
-  fetch('http://127.0.0.1:7242/ingest/6808c4e3-8e24-425f-9787-5612ce4bf9c2', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ location: 'client.js:apiLogin', message: 'Login fetch completed', data: { url, status: r.status, ok: r.ok }, timestamp: Date.now(), hypothesisId: 'H4' }) }).catch(() => { });
-  // #endregion
   const data = await r.json().catch(() => ({}));
   if (!r.ok) {
     const err = new Error(data.error || data.message || 'Login failed');
@@ -63,7 +57,6 @@ export async function apiRegister(name, email, password) {
   return data;
 }
 
-// ——— Applications ———
 export async function apiApplicationsMe() {
   const r = await fetch(`${BASE}/api/applications/me`, { headers: headers() });
   if (r.status === 404) return null;
@@ -100,7 +93,6 @@ export async function apiUpdateApplicationStatus(id, status) {
   return handleRes(r);
 }
 
-// ——— Questions ———
 export async function apiQuestions() {
   const r = await fetch(`${BASE}/api/questions`, { headers: headers() });
   return handleRes(r);
@@ -135,7 +127,6 @@ export async function apiDeleteQuestion(id) {
   return handleRes(r);
 }
 
-// ——— Assessments ———
 export async function apiAssessmentsStart() {
   const r = await fetch(`${BASE}/api/assessments/start`, {
     method: 'POST',

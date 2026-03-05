@@ -12,7 +12,7 @@ import {
 import { validateApplicationForm, wordCount } from '../utils/validation';
 import { apiApplicationsMe, apiSubmitApplication } from '../api/client';
 import { saveApplication, getApplicationByCandidateId } from '../utils/mockStore';
-import './ApplicationForm.css';
+import '../styles/ApplicationForm.css';
 
 const INITIAL = {
   fullName: '',

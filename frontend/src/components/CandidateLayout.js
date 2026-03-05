@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import './CandidateLayout.css';
+import '../styles/CandidateLayout.css';
 
 const CANDIDATE_STEPS = [
   { num: 1, label: 'Login / Register', path: '/login' },

@@ -13,7 +13,7 @@ import AdminCandidates from './pages/AdminCandidates';
 import AdminCandidateDetail from './pages/AdminCandidateDetail';
 import AdminQuestions from './pages/AdminQuestions';
 import AdminResults from './pages/AdminResults';
-import './App.css';
+import './styles/App.css';
 
 function App() {
   return (

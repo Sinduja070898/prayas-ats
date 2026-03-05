@@ -5,7 +5,7 @@ import CandidateLayout from '../components/CandidateLayout';
 import { apiApplicationsMe, apiAssessmentsMe } from '../api/client';
 import { getApplicationByCandidateId, hasAttemptedAssessment } from '../utils/mockStore';
 import { APPLICATION_STATUS, PUNJABI_PROFICIENCY_OPTIONS } from '../utils/constants';
-import './CandidateDashboard.css';
+import '../styles/CandidateDashboard.css';
 
 const JOURNEY_LABELS = ['Registered', 'Applied', 'Shortlisted', 'Assessment', 'Complete'];
 

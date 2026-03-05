@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { validateEmail, validatePassword } from '../utils/validation';
-import './Auth.css';
+import '../styles/Auth.css';
 
 export default function Login() {
   const [email, setEmail] = useState('');

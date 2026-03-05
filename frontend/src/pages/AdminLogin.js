@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import AdminLayout from '../components/AdminLayout';
 import { validateEmail, validatePassword } from '../utils/validation';
-import './AdminLogin.css';
+import '../styles/AdminLogin.css';
 
 export default function AdminLogin() {
   const [email, setEmail] = useState('');

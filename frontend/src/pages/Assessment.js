@@ -7,7 +7,7 @@ import { getMcqQuestions, getApplicationByCandidateId } from '../utils/mockStore
 import { hasAttemptedAssessment, saveAssessmentResult } from '../utils/mockStore';
 import { updateApplicationStatus } from '../utils/mockStore';
 import { APPLICATION_STATUS } from '../utils/constants';
-import './Assessment.css';
+import '../styles/Assessment.css';
 
 const TOTAL_MINUTES = 30;
 
@@ -139,7 +139,7 @@ export default function Assessment() {
         <p>Only shortlisted candidates can take the assessment. Complete your application and wait for shortlisting.</p>
         {serverMissingApplication && (
           <p className="assessment-blocked-hint">
-            If you were shortlisted, the server may have been restarted and your record was lost. Please <Link to="/application">submit your application again</Link>, then ask the admin to shortlist you again.
+            Can’t find your application. <Link to="/application">Submit again</Link> and ask admin to shortlist you.
           </p>
         )}
         <Link to="/dashboard" className="btn btn-primary" style={{ marginTop: '1rem' }}>Back to Dashboard</Link>

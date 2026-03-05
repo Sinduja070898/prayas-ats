@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import CandidateLayout from '../components/CandidateLayout';
 import { apiAssessmentsMe } from '../api/client';
 import { getResultByCandidateId } from '../utils/mockStore';
-import './AssessmentConfirmation.css';
+import '../styles/AssessmentConfirmation.css';
 
 function formatDuration(seconds) {
   if (seconds == null || seconds < 0) return '—';

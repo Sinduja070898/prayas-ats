@@ -4,7 +4,7 @@ import AdminLayout from '../components/AdminLayout';
 import { apiApplicationsList, apiAssessmentsList, apiUpdateApplicationStatus } from '../api/client';
 import { getCandidates, getApplications, getAssessmentResults, updateApplicationStatus } from '../utils/mockStore';
 import { APPLICATION_STATUS } from '../utils/constants';
-import './AdminCandidates.css';
+import '../styles/AdminCandidates.css';
 
 const FILTER_ALL = 'all';
 const FILTER_PENDING = 'pending';

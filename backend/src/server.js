@@ -1,19 +1,10 @@
 require('dotenv').config();
-const fs = require('fs');
-const path = require('path');
 const express = require('express');
 const cors = require('cors');
-
-const DEBUG_LOG = path.join(__dirname, '../../.cursor/debug.log');
-function debugLog(location, message, data, hypothesisId) {
-  const line = JSON.stringify({ location, message, data, hypothesisId, timestamp: Date.now() }) + '\n';
-  try { fs.appendFileSync(DEBUG_LOG, line); } catch (_) { }
-}
 
 const app = express();
 const PORT = process.env.PORT || 5001;
 
-// Allow frontend origin(s) – in dev allow common localhost variants to avoid 403 from CORS
 const allowedOrigins = process.env.FRONTEND_URL
   ? [process.env.FRONTEND_URL]
   : ['http://localhost:3000', 'http://127.0.0.1:3000', 'http://localhost:3001', 'http://127.0.0.1:3001'];
@@ -26,14 +17,9 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// #region agent log
-app.use('/api', (req, res, next) => {
-  debugLog('server.js:api-incoming', 'API request received', { method: req.method, path: req.path, url: req.url, origin: req.headers.origin }, 'H1');
-  next();
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true, message: 'Assessment Platform API' });
 });
-// #endregion
-
-// Health check
 app.get('/api/health', (req, res) => {
   res.json({ ok: true, message: 'Assessment Platform API' });
 });

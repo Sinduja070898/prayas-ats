@@ -22,7 +22,7 @@ Node.js + Express API for the Assessment Platform (MERN). MongoDB and full route
    - `PORT` – server port (default 5001). Frontend proxy in `frontend/package.json` must match (`"proxy": "http://localhost:5001"`).
    - `JWT_SECRET` – secret for JWT signing (any string; use a strong one in production).
    - `FRONTEND_URL` – frontend origin for CORS (default `http://localhost:3000`).
-   - `MONGODB_URI` – optional; leave unset to use in-memory store. **Note:** The in-memory store resets on server restart, so applications and shortlist status are lost. Candidates may need to re-submit and be shortlisted again after a restart.
+   - `MONGODB_URI` – optional; unset uses in-memory store (data lost on restart).
 
 3. **Run**
 
@@ -38,7 +38,7 @@ Node.js + Express API for the Assessment Platform (MERN). MongoDB and full route
 
    Server runs at `http://localhost:5001` (or the port in `.env`).
 
-3. **Port already in use (EADDRINUSE)**
+4. **Port already in use (EADDRINUSE)**
 
    If you see `Error: listen EADDRINUSE: address already in use :::5001`:
 
